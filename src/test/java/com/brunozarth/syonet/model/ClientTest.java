@@ -12,7 +12,7 @@ class ClienteTest {
         assertEquals(1L, client.getId());
         assertEquals("Keith Richards", client.getName());
         assertEquals("keith@example.com", client.getEmail());
-        assertEquals("1990-05-15", client.getBirth());
+        assertEquals("1990-05-15", client.getBirthdate());
     }
 
     @Test
@@ -21,11 +21,11 @@ class ClienteTest {
         client.setId(2L);
         client.setName("Keith Richards");
         client.setEmail("keith@example.com");
-        client.setBirth("1992-10-20");
+        client.setBirthdate("1992-10-20");
 
         assertEquals(2L, client.getId());
         assertEquals("Keith Richards", client.getName());
         assertEquals("keith@example.com", client.getEmail());
-        assertEquals("1992-10-20", client.getBirth());
+        assertEquals("1992-10-20", client.getBirthdate());
     }
 }

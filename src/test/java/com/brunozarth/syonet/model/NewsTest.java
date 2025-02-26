@@ -9,8 +9,8 @@ public class NewsTest {
         News news = new News(1L, "Title 1", "Description 1", "http://example.com");
 
         assertEquals(1L, news.getId());
-        assertEquals("Title 1", news.getTitulo());
-        assertEquals("Description 1", news.getDescricao());
+        assertEquals("Title 1", news.getTitle());
+        assertEquals("Description 1", news.getDescription());
         assertEquals("http://example.com", news.getLink());
     }
 
