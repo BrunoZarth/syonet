@@ -3,7 +3,7 @@ package com.brunozarth.syonet.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClienteTest {
+class ClientTest {
 
     @Test
     void testClientConstructorAndGetters() {
