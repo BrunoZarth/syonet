@@ -24,14 +24,14 @@ class NewsRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        news1 = new News(null, "Title 1", "Description 1", "http://link1.com");
-        news2 = new News(null, "Title 2", "Description 2", "http://link2.com");
+        news1 = new News(null, "Title 1", "Description 1", "http://link1.com", false);
+        news2 = new News(null, "Title 2", "Description 2", "http://link2.com", false);
         newsRepository.saveAll(List.of(news1, news2));
     }
 
     @Test
     void shouldSaveNews() {
-        News news = new News(null, "New Title", "New Description", "http://newlink.com");
+        News news = new News(null, "New Title", "New Description", "http://newlink.com", false);
         News savedNews = newsRepository.save(news);
 
         assertThat(savedNews).isNotNull();

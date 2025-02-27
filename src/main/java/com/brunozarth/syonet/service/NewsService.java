@@ -17,7 +17,7 @@ public class NewsService {
     private final NewsRepository newsRepository;
 
     public NewsDTO createNews(NewsDTO newsDTO) {
-        News news = new News(null, newsDTO.getTitle(), newsDTO.getDescription(), newsDTO.getLink());
+        News news = new News(null, newsDTO.getTitle(), newsDTO.getDescription(), newsDTO.getLink(), false);
         News savedNews = newsRepository.save(news);
         return new NewsDTO(savedNews.getTitle(), savedNews.getDescription(), savedNews.getLink());
     }

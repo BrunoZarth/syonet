@@ -31,7 +31,7 @@ class NewsServiceTest {
 
     @BeforeEach
     void setUp() {
-        news = new News(1L, "Title", "Description", "http://link.com");
+        news = new News(1L, "Title", "Description", "http://link.com", false);
         newsDTO = new NewsDTO("Title", "Description", "http://link.com");
     }
 

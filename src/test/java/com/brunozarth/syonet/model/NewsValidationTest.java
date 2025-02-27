@@ -23,21 +23,21 @@ class NewsValidationTest {
 
     @Test
     void shouldNotAllowEmptyTitle() {
-        News news = new News(null, "", "Description", "http://valid-link.com");
+        News news = new News(null, "", "Description", "http://valid-link.com", false);
         Set<ConstraintViolation<News>> violations = validator.validate(news);
         assertFalse(violations.isEmpty());
     }
 
     @Test
     void shouldNotAllowNullDescription() {
-        News news = new News(null, "Valid Title", null, "http://valid-link.com");
+        News news = new News(null, "Valid Title", null, "http://valid-link.com", false);
         Set<ConstraintViolation<News>> violations = validator.validate(news);
         assertFalse(violations.isEmpty());
     }
 
     @Test
     void shouldAllowValidNews() {
-        News news = new News(null, "Valid Title", "Valid Description", "http://valid-link.com");
+        News news = new News(null, "Valid Title", "Valid Description", "http://valid-link.com", false);
         Set<ConstraintViolation<News>> violations = validator.validate(news);
         assertTrue(violations.isEmpty());
     }

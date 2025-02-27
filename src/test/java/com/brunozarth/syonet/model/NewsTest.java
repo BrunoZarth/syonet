@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NewsTest {
     @Test
     void testNewsConstructorAndGetters() {
-        News news = new News(1L, "Title 1", "Description 1", "http://example.com");
+        News news = new News(1L, "Title 1", "Description 1", "http://example.com", false);
 
         assertEquals(1L, news.getId());
         assertEquals("Title 1", news.getTitle());

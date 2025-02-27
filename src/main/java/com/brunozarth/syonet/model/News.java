@@ -23,4 +23,6 @@ public class News {
     private String description;
 
     private String link;
+
+    private boolean processed;
 }
