@@ -1,8 +1,12 @@
 package com.brunozarth.syonet.DTO;
 
+import com.brunozarth.syonet.validation.UniqueEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +17,9 @@ public class ClientDTO {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
+    @UniqueEmail
     private String email;
 
-    private String birthdate; // Optional
+    @Past(message = "Birthdate must be in the past")
+    private LocalDate birthdate;
 }

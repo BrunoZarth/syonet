@@ -1,38 +1,49 @@
 package com.brunozarth.syonet.service;
 
-
 import com.brunozarth.syonet.DTO.ClientDTO;
 import com.brunozarth.syonet.model.Client;
 import com.brunozarth.syonet.repository.ClientRepository;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.util.Set;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
 
-    private final ClientRepository ClientRepository;
-    private final Validator validator;
+    private final ClientRepository clientRepository;
 
-    public ClientService(ClientRepository ClientRepository) {
-        this.ClientRepository = ClientRepository;
-        this.validator = Validation.buildDefaultValidatorFactory().getValidator();
+    public Client createClient(ClientDTO clientDTO) {
+        Client client = new Client(null, clientDTO.getName(), clientDTO.getEmail(), clientDTO.getBirthdate());
+        return clientRepository.save(client);
     }
 
-    public Client createClient(ClientDTO dto) {
-        Set<ConstraintViolation<ClientDTO>> violations = validator.validate(dto);
-        if (!violations.isEmpty()) {
-            throw new jakarta.validation.ConstraintViolationException(violations);
-        }
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
 
-        if (ClientRepository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already in use");
-        }
+    public Optional<Client> getClientById(Long id) {
+        return clientRepository.findById(id);
+    }
 
-        Client Client = new Client(null, dto.getName(), dto.getEmail(), dto.getBirthdate());
-        return ClientRepository.save(Client);
+    public Optional<Client> getClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
+    public Client updateClient(Long id, ClientDTO clientDTO) {
+        return clientRepository.findById(id)
+                .map(existingClient -> {
+                    existingClient.setName(clientDTO.getName());
+                    existingClient.setEmail(clientDTO.getEmail());
+                    existingClient.setBirthdate(clientDTO.getBirthdate());
+                    return clientRepository.save(existingClient);
+                })
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+    }
+
+    public void deleteClient(Long id) {
+        clientRepository.deleteById(id);
     }
 }
-
