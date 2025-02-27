@@ -1,6 +1,6 @@
 package com.brunozarth.syonet.service;
 
-import com.brunozarth.syonet.dto.EmailMessageDTO;
+import com.brunozarth.syonet.DTO.EmailMessageDTO;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -4,7 +4,7 @@ import com.brunozarth.syonet.model.Client;
 import com.brunozarth.syonet.model.News;
 import com.brunozarth.syonet.repository.ClientRepository;
 import com.brunozarth.syonet.repository.NewsRepository;
-import com.brunozarth.syonet.service.EmailService;
+import com.brunozarth.syonet.service.EmailProducer;
 import com.brunozarth.syonet.service.ScheduledEmailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class ScheduledEmailServiceTest {
 
     @Mock private ClientRepository clientRepository;
     @Mock private NewsRepository newsRepository;
-    @Mock private EmailService emailService;
+    @Mock private EmailProducer emailProducer;
 
     @InjectMocks
     private ScheduledEmailService scheduledEmailService;
@@ -40,8 +40,7 @@ class ScheduledEmailServiceTest {
 
         scheduledEmailService.sendDailyNewsEmails();
 
-        verify(emailService, times(1)).sendNewsEmail(any(), any());
+        verify(emailProducer, times(1)).sendEmailToQueue(any());
         verify(newsRepository, times(1)).saveAll(news);
     }
 }
-
