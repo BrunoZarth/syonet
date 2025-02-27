@@ -77,5 +77,5 @@ class ClientServiceTest {
         ConstraintViolation<ClientDTO> violation = violations.iterator().next();
         assertEquals("Duplicated Email", violation.getMessage());
     }
-    
+
 }
