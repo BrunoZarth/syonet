@@ -29,7 +29,7 @@ class ClientDTOTest {
     }
 
     @Test
-    void testNomeIsRequired() {
+    void testNameIsRequired() {
         ClientDTO dto = new ClientDTO("", "john@example.com", "1990-05-15");
 
         Set<ConstraintViolation<ClientDTO>> violations = validator.validate(dto);
