@@ -19,18 +19,18 @@ public class NewsService {
     public NewsDTO createNews(NewsDTO newsDTO) {
         News news = new News(null, newsDTO.getTitle(), newsDTO.getDescription(), newsDTO.getLink(), false);
         News savedNews = newsRepository.save(news);
-        return new NewsDTO(savedNews.getTitle(), savedNews.getDescription(), savedNews.getLink());
+        return new NewsDTO(savedNews.getTitle(), savedNews.getDescription(), savedNews.getLink(), savedNews.isProcessed());
     }
 
     public List<NewsDTO> getAllNews() {
         return newsRepository.findAll().stream()
-                .map(news -> new NewsDTO(news.getTitle(), news.getDescription(), news.getLink()))
+                .map(news -> new NewsDTO(news.getTitle(), news.getDescription(), news.getLink(), news.isProcessed()))
                 .collect(Collectors.toList());
     }
 
     public Optional<NewsDTO> getNewsById(Long id) {
         return newsRepository.findById(id)
-                .map(news -> new NewsDTO(news.getTitle(), news.getDescription(), news.getLink()));
+                .map(news -> new NewsDTO(news.getTitle(), news.getDescription(), news.getLink(), news.isProcessed()));
     }
 
     public NewsDTO updateNews(Long id, NewsDTO newsDTO) {
@@ -40,7 +40,7 @@ public class NewsService {
                     existingNews.setDescription(newsDTO.getDescription());
                     existingNews.setLink(newsDTO.getLink());
                     News updatedNews = newsRepository.save(existingNews);
-                    return new NewsDTO(updatedNews.getTitle(), updatedNews.getDescription(), updatedNews.getLink());
+                    return new NewsDTO(updatedNews.getTitle(), updatedNews.getDescription(), updatedNews.getLink(), updatedNews.isProcessed());
                 })
                 .orElseThrow(() -> new IllegalArgumentException("News with ID " + id + " not found"));
     }

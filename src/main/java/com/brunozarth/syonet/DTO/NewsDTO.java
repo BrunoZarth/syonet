@@ -20,4 +20,6 @@ public class NewsDTO {
     private String description;
 
     private String link;
+
+    private boolean processed;
 }

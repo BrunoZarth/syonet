@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -21,5 +23,6 @@ public class Client {
     @Email(message = "Invalid email format")
     private String email;
 
-    private String birthdate; // Optional
+    @Past(message = "Birthdate must be in the past")
+    private LocalDate birthdate;
 }

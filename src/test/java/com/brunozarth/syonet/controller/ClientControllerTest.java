@@ -14,6 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDate;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,7 +41,7 @@ class ClientControllerTest {
 
     @Test
     void shouldCreateClientSuccessfully() throws Exception {
-        ClientDTO dto = new ClientDTO("John Doe", "john@example.com", "1990-05-15");
+        ClientDTO dto = new ClientDTO("John Doe", "john@example.com", LocalDate.of(1990,1,1));
         Client client = new Client(1L, dto.getName(), dto.getEmail(), dto.getBirthdate());
 
         when(clientService.createClient(any(ClientDTO.class))).thenReturn(client);
@@ -54,7 +57,7 @@ class ClientControllerTest {
 
     @Test
     void shouldReturnBadRequestForInvalidClient() throws Exception {
-        ClientDTO dto = new ClientDTO("", "invalid-email", "1990-05-15");
+        ClientDTO dto = new ClientDTO("", "invalid-email", LocalDate.of(1990,1,1));
 
         mockMvc.perform(post("/clients")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +67,7 @@ class ClientControllerTest {
 
     @Test
     void shouldReturnConflictForDuplicateEmail() throws Exception {
-        ClientDTO dto = new ClientDTO("John Doe", "john@example.com", "1990-05-15");
+        ClientDTO dto = new ClientDTO("John Doe", "john@example.com", LocalDate.of(1990,1,1));
 
         when(clientService.createClient(any(ClientDTO.class)))
                 .thenThrow(new IllegalArgumentException("Email already in use"));

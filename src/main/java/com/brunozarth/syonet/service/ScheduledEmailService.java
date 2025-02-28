@@ -8,12 +8,14 @@ import com.brunozarth.syonet.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ScheduledEmailService {
 
     private final ClientRepository clientRepository;
@@ -22,6 +24,7 @@ public class ScheduledEmailService {
 
     @Scheduled(cron = "0 0 8 * * ?")
     public void sendDailyNewsEmails() {
+        log.info("Executing task at 08:00");
         List<News> unprocessedNews = newsRepository.findByProcessedFalse();
 
         if (unprocessedNews.isEmpty()) return;

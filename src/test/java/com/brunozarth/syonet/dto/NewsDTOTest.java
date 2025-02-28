@@ -24,7 +24,7 @@ class NewsDTOTest {
 
     @Test
     void shouldPassValidationWithValidData() {
-        NewsDTO newsDTO = new NewsDTO("Valid Title", "Valid Description", "http://valid-link.com");
+        NewsDTO newsDTO = new NewsDTO("Valid Title", "Valid Description", "http://valid-link.com", false);
 
         Set<ConstraintViolation<NewsDTO>> violations = validator.validate(newsDTO);
 
@@ -33,7 +33,7 @@ class NewsDTOTest {
 
     @Test
     void shouldFailValidationWhenTitleIsBlank() {
-        NewsDTO newsDTO = new NewsDTO("", "Valid Description", "http://valid-link.com");
+        NewsDTO newsDTO = new NewsDTO("", "Valid Description", "http://valid-link.com", false);
 
         Set<ConstraintViolation<NewsDTO>> violations = validator.validate(newsDTO);
 
@@ -43,7 +43,7 @@ class NewsDTOTest {
 
     @Test
     void shouldFailValidationWhenDescriptionIsBlank() {
-        NewsDTO newsDTO = new NewsDTO("Valid Title", "", "http://valid-link.com");
+        NewsDTO newsDTO = new NewsDTO("Valid Title", "", "http://valid-link.com", false);
 
         Set<ConstraintViolation<NewsDTO>> violations = validator.validate(newsDTO);
 
@@ -53,7 +53,7 @@ class NewsDTOTest {
 
     @Test
     void shouldAllowNullLink() {
-        NewsDTO newsDTO = new NewsDTO("Valid Title", "Valid Description", null);
+        NewsDTO newsDTO = new NewsDTO("Valid Title", "Valid Description", null, false);
 
         Set<ConstraintViolation<NewsDTO>> violations = validator.validate(newsDTO);
 
