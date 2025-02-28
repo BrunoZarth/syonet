@@ -87,11 +87,11 @@ A aplicação utiliza RabbitMQ para processar emails em segundo plano.
 No painel do RabbitMQ, na aba 'Queues and Streams', opção Publish message, podemos testar a mensageria com o seguinte Payload:   
 
   ```sh
-  '{
+  {
     "to": "joao@email.com",
     "subject": "Bem-vindo!",
     "body": "Obrigado por se cadastrar."
-  }'
+  }
   ```
 
 - **Processamento:** O consumidor lê as mensagens da fila `emailQueue` (novas notícias não processadas entram automaticamente na fila) e envia os emails utilizando `JavaMailSender` no horário estipulado (8:00, podendo ser alterado para fins de teste na classe service/ScheduledEmailService).
@@ -101,10 +101,7 @@ No painel do RabbitMQ, na aba 'Queues and Streams', opção Publish message, pod
 ## **Testes**
 O projeto segue a metodologia **TDD (Test-Driven Development)** com **JUnit** e **Mockito**.
 
-Para rodar os testes:
-```sh
-mvn test
-```
+Rode os testes pelo IntelliJ.
 
 ---
 
