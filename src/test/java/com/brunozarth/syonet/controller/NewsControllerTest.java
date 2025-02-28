@@ -39,7 +39,7 @@ class NewsControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(newsController).build();
         objectMapper = new ObjectMapper();
 
-        newsDTO = new NewsDTO("Title 1", "Description 1", "http://link1.com");
+        newsDTO = new NewsDTO("Title 1", "Description 1", "http://link1.com", false);
     }
 
     @Test

@@ -6,6 +6,8 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +23,7 @@ class ClientValidationTest {
 
     @Test
     void testValidClient() {
-        Client Client = new Client(null, "John Doe", "john@example.com", "1990-05-15");
+        Client Client = new Client(null, "John Doe", "john@example.com", LocalDate.of(1990,1,1));
 
         Set<ConstraintViolation<Client>> violations = validator.validate(Client);
         assertTrue(violations.isEmpty(), "Valid Client should not have violations");
@@ -29,7 +31,7 @@ class ClientValidationTest {
 
     @Test
     void testNameIsRequired() {
-        Client Client = new Client(null, "", "john@example.com", "1990-05-15");
+        Client Client = new Client(null, "", "john@example.com", LocalDate.of(1990,1,1));
 
         Set<ConstraintViolation<Client>> violations = validator.validate(Client);
         assertFalse(violations.isEmpty(), "Name is required");
@@ -37,8 +39,8 @@ class ClientValidationTest {
 
     @Test
     void testEmailIsRequiredAndValidFormat() {
-        Client Client1 = new Client(null, "John Doe", "", "1990-05-15");
-        Client Client2 = new Client(null, "John Doe", "invalid-email", "1990-05-15");
+        Client Client1 = new Client(null, "John Doe", "", LocalDate.of(1990,1,1));
+        Client Client2 = new Client(null, "John Doe", "invalid-email", LocalDate.of(1990,1,1));
 
         assertFalse(validator.validate(Client1).isEmpty(), "Email is required");
         assertFalse(validator.validate(Client2).isEmpty(), "Email format should be valid");
