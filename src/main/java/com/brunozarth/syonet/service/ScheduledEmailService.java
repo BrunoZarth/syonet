@@ -22,9 +22,9 @@ public class ScheduledEmailService {
     private final NewsRepository newsRepository;
     private final EmailProducer emailProducer;
 
-    @Scheduled(cron = "0 48 22 * * ?")
+    @Scheduled(cron = "0 0 8 * * ?")
     public void sendDailyNewsEmails() {
-        log.info("Executando tarefa às 22:31");
+        log.info("Executing task at 08:00");
         List<News> unprocessedNews = newsRepository.findByProcessedFalse();
 
         if (unprocessedNews.isEmpty()) return;
